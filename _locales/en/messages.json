@@ -1,0 +1,10 @@
+{
+  "name": {
+    "message": "Cagematch+ TS",
+    "description": "extension name"
+  },
+  "description": {
+    "message": "Extended features to enhance Cagematch browsing experience",
+    "description": "extension description"
+  }
+}

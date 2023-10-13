@@ -1,0 +1,55 @@
+#crx-root-1 {
+  position: fixed;
+  top: 42px;
+  right: 15px;
+}
+
+.body-zoomed {
+  zoom: 150%;
+}
+
+.event-controls {
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.event-controls__btn {
+  width: 70px;
+  height: 70px;
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+  box-shadow: 4px 0 10px 0;
+  transition: opacity .3s;
+  transition: background-color .3s;
+  display: flex;
+}
+
+.event-controls__btn_disabled {
+  opacity: .5;
+  cursor: default;
+}
+
+.event-controls__btn:not(.event-controls__btn_disabled):hover {
+  background-color: rgba(255, 255, 255, .8);
+}
+
+.event-controls__img {
+  width: 80%;
+  object-fit: contain;
+  margin: auto;
+}
+
+.event-controls__btn_inactive {
+  border: 5px solid white;
+  background-color: transparent;
+}

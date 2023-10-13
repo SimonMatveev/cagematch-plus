@@ -1,0 +1,8 @@
+.rating_hidden {
+  color: transparent !important;
+  background-color: rgba(0, 0, 0, .3);
+}
+
+.rating-link_hidden:hover {
+  text-decoration: none;
+}

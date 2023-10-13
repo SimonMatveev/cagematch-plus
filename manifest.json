@@ -1,0 +1,62 @@
+{
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "default_locale": "en",
+  "icons": {
+    "32": "icons/icon-32.png",
+    "64": "icons/icon-32.png",
+    "128": "icons/icon-32.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icons/icon-32.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/components/event/index.tsx",
+        "src/components/unratedSpoilers/unratedSpoilers.ts"
+      ],
+      "matches": [
+        "https://www.cagematch.net/?id=1&*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "src/components/redirect-on-card/redirectOnCard.ts"
+      ],
+      "matches": [
+        "https://www.cagematch.net/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "src/components/graphs/index.tsx",
+        "src/components/topsBtns/topsBtns.ts"
+      ],
+      "matches": [
+        "https://www.cagematch.net/?id=68&page=2"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "src/components/favEvents/index.tsx"
+      ],
+      "matches": [
+        "https://www.cagematch.net/?id="
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "src/background.ts"
+  },
+  "permissions": [
+    "storage"
+  ]
+}

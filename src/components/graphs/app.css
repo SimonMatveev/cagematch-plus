@@ -1,0 +1,37 @@
+.LayoutContent {
+  position: relative;
+}
+
+.graph {
+  position: absolute;
+  top: 80px;
+  right: 29px;
+  height: 137px;
+}
+
+.graph__container {
+  border: 3px solid #CCC;
+  padding: 10px;
+  height: 137px;
+  position: relative;
+}
+
+.graph__btn {
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.graph__btn:hover {
+  font-weight: bold;
+}
+
+.graph__title {
+  margin: 0 0 5px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 12px;
+}
+
+canvas {
+  max-height: none !important;
+}
