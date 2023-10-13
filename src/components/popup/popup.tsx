@@ -80,7 +80,7 @@ const App: FC = () => {
           </div>
           <div className='popup__wrapper'>
             <input className='popup__checkbox-active' type='checkbox' id='favEvents' checked={utilsActive.favEvents} onChange={handleActiveStateChange} />
-            <label htmlFor='topsBtns' className='popup__label'>Любимые ТВ-шоу</label>
+            <label htmlFor='favEvents' className='popup__label'>Любимые ТВ-шоу</label>
           </div>
           <div className='popup__shows'>
             {showsActive.map(show => {

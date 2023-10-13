@@ -10,8 +10,7 @@ const App: FC = () => {
       .then(res => {
         const showsREArr: string[] = res.showsActive.filter((show: ITVShow) => show.isActive).map((show: ITVShow) => show.regexp);
         const showsRE = new RegExp(`(${showsREArr.join('|')})`);
-        console.log(showsRE)
-        const arr: string[] = [...document.querySelectorAll<HTMLElement>('.TRowTVShow')].filter(item => showsRE.test(item.innerText)).map(item => item.innerHTML);
+        const arr: string[] = [...document.querySelectorAll<HTMLElement>('.TRowTVShow'), ...document.querySelectorAll<HTMLElement>('.TRowOnlineStream')].filter(item => showsRE.test(item.innerText)).map(item => item.innerHTML);
         setEvents(arr);
       })
       .catch(err => console.log(err));
