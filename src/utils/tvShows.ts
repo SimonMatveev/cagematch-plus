@@ -36,6 +36,11 @@ const TV_SHOWS: ITVShow[] = [
     name: 'Ring Of Honor',
     regexp: 'ROH on HonorClub',
     isActive: true,
+  }, {
+    id: 'collision',
+    name: 'AEW Collision',
+    regexp: 'AEW Collision',
+    isActive: true,
   },
 
 ];

@@ -30,7 +30,7 @@
 <br><br><img src='./src/images/readme-6.png' alt='Переключатели в попапе' width='350'>
 
 ## Стек технологий
-HTML, JS, CSS, JSX, React
+HTML, CSS, TypeScript, React
 
 ## Запуск проекта
 1. Чтобы использовать расширение в распакованном виде, для начала установим пакеты
