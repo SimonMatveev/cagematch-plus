@@ -1,5 +1,5 @@
 import { useState, useEffect, FC } from 'react';
-import './app.css';
+import './favEvents.css';
 import { ITVShow } from '../../types/types';
 
 const App: FC = () => {

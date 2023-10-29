@@ -17,6 +17,7 @@
     {
       "js": [
         "src/components/event/index.tsx",
+        "src/components/event/eventRefresh.ts",
         "src/components/unratedSpoilers/unratedSpoilers.ts"
       ],
       "matches": [

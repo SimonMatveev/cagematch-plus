@@ -7,6 +7,7 @@ const UTILS_ACTIVE: IUtilsActive = {
   redirectOnCard: true,
   topsBtns: true,
   favEvents: true,
+  refreshEvent: true,
 };
 
 export default UTILS_ACTIVE;

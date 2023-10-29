@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import "./app.css";
+import "./graphs.css";
 import GraphContent from './GraphContent';
 
 const App = () => {

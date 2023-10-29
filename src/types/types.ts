@@ -5,6 +5,7 @@ export interface IUtilsActive {
   redirectOnCard: boolean,
   topsBtns: boolean,
   favEvents: boolean,
+  refreshEvent: boolean,
 };
 
 export type TCreateLiFn = (link: string, text: string) => HTMLLIElement;

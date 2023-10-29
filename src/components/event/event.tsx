@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import './app.css';
+import './event.css';
 import upBtn from '../../images/triangle-up.svg';
 import downBtn from '../../images/triangle-down.svg';
 import resetBtn from '../../images/reset.svg';

@@ -74,9 +74,13 @@ const App: FC = () => {
             <input className='popup__checkbox-active' type='checkbox' id='redirectOnCard' checked={utilsActive.redirectOnCard} onChange={handleActiveStateChange} />
             <label htmlFor='redirectOnCard' className='popup__label'>Переадресация на страницу карда</label>
           </div>
-          <div className='popup__wrapper popup__wrapper_border'>
+          <div className='popup__wrapper'>
             <input className='popup__checkbox-active' type='checkbox' id='topsBtns' checked={utilsActive.topsBtns} onChange={handleActiveStateChange} />
             <label htmlFor='topsBtns' className='popup__label'>Дополнительные кнопки в профиле</label>
+          </div>
+          <div className='popup__wrapper popup__wrapper_border'>
+            <input className='popup__checkbox-active' type='checkbox' id='refreshEvent' checked={utilsActive.refreshEvent} onChange={handleActiveStateChange} />
+            <label htmlFor='refreshEvent' className='popup__label'>Автоперезагрузка страницы эвента</label>
           </div>
           <div className='popup__wrapper'>
             <input className='popup__checkbox-active' type='checkbox' id='favEvents' checked={utilsActive.favEvents} onChange={handleActiveStateChange} />
