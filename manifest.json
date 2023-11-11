@@ -21,7 +21,7 @@
         "src/components/unratedSpoilers/unratedSpoilers.ts"
       ],
       "matches": [
-        "https://www.cagematch.net/?id=1&*"
+        "https://www.cagematch.net/2k16/?id=1&*"
       ],
       "run_at": "document_end"
     },
@@ -30,7 +30,7 @@
         "src/components/redirect-on-card/redirectOnCard.ts"
       ],
       "matches": [
-        "https://www.cagematch.net/*"
+        "https://www.cagematch.net/2k16/*"
       ],
       "run_at": "document_idle"
     },
@@ -40,7 +40,7 @@
         "src/components/topsBtns/topsBtns.ts"
       ],
       "matches": [
-        "https://www.cagematch.net/?id=68&page=2"
+        "https://www.cagematch.net/2k16/?id=68&page=2"
       ],
       "run_at": "document_end"
     },
@@ -49,7 +49,7 @@
         "src/components/favEvents/index.tsx"
       ],
       "matches": [
-        "https://www.cagematch.net/?id="
+        "https://www.cagematch.net/2k16/?id="
       ],
       "run_at": "document_end"
     }
