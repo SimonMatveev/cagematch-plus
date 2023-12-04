@@ -21,4 +21,3 @@ chrome.storage.sync.get('utilsActive')
     }
   })
   .catch(err => console.log(err));
-  
