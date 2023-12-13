@@ -1,7 +1,9 @@
+import { EVENT_PATTERN } from "../../utils/regexps";
+
 chrome.storage.sync.get('utilsActive')
   .then(res => {
     if (res.utilsActive.refreshEvent) {
-      let key: string = window.location.toString().match(/&nr=(\d+)/)?.[1] || '0';
+      let key: string = window.location.toString().match(EVENT_PATTERN)?.[1] || '0';
 
       const setLocal = () => {
         chrome.storage.local.set({ [key + '_history']: true })
