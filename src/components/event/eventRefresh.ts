@@ -1,25 +1,49 @@
-import { EVENT_PATTERN } from "../../utils/regexps";
+const move: { [key: string]: number[] } = {
+  top: [],
+  right: [],
+  down: [],
+  left: [],
+}
+
+const refreshWithMouse = (e: MouseEvent) => {
+  if (e.buttons === 2) {
+    console.log(move)
+    console.log(e.clientX, e.clientY)
+    if (move.top.length === 0) {
+      move.top[0] = e.clientX;
+      move.top[1] = e.clientY;
+    } else if (move.top.length !== 0 && move.right.length === 0 && e.clientX > move.top[0] && e.clientY > move.top[1]) {
+      move.right[0] = e.clientX;
+      move.right[1] = e.clientY;
+    } else if (move.right.length !== 0 && move.down.length === 0 && e.clientX > move.right[0] && e.clientY > move.right[1]) {
+      move.down[0] = e.clientX;
+      move.down[1] = e.clientY;
+    } else if (move.down.length !== 0 && move.left.length === 0 && e.clientX < move.down[0] && e.clientY < move.down[1]) {
+      move.left[0] = e.clientX;
+      move.left[1] = e.clientY;
+    } else if (move.left.length !== 0) {
+      location.reload();
+      window.removeEventListener('mousemove', refreshWithMouse);
+      window.removeEventListener('mousedown', resetMove);
+    }
+  }
+}
+const resetMove = () => {
+  move.top = [];
+  move.right = [];
+  move.down = [];
+  move.left = [];
+}
 
 chrome.storage.sync.get('utilsActive')
   .then(res => {
     if (res.utilsActive.refreshEvent) {
-      let key: string = window.location.toString().match(EVENT_PATTERN)?.[1] || '0';
 
-      const setLocal = () => {
-        chrome.storage.local.set({ [key + '_history']: true })
-          .catch(err => console.log(err));
-      }
-
-      window.addEventListener('beforeunload', setLocal);
-
-      chrome.storage.local.get([key + '_history'])
-        .then(res => {
-          if (res[key + '_history']) {
-            window.location.reload();
-            chrome.storage.local.remove([key + '_history']);
-          }
-        })
-
+      window.addEventListener('mousemove', refreshWithMouse);
+      window.addEventListener('mousedown', resetMove);
+    } else {
+      window.removeEventListener('mousemove', refreshWithMouse);
+      window.removeEventListener('mousedown', resetMove);
     }
   })
   .catch(err => console.log(err));

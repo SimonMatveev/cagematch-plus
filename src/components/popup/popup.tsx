@@ -53,6 +53,8 @@ const App: FC = () => {
     }
   }, [changeShowsFromPopup]);
 
+  useEffect(() => console.log(showsActive), [showsActive])
+
   return (
     <section className='popup'>
       <h1 className='popup__title'>Cagematch+</h1>
@@ -80,7 +82,7 @@ const App: FC = () => {
           </div>
           <div className='popup__wrapper popup__wrapper_border'>
             <input className='popup__checkbox-active' type='checkbox' id='refreshEvent' checked={utilsActive.refreshEvent} onChange={handleActiveStateChange} />
-            <label htmlFor='refreshEvent' className='popup__label'>Автоперезагрузка страницы эвента</label>
+            <label htmlFor='refreshEvent' className='popup__label'>Перезагрузка страницы эвента жестом</label>
           </div>
           <div className='popup__wrapper'>
             <input className='popup__checkbox-active' type='checkbox' id='favEvents' checked={utilsActive.favEvents} onChange={handleActiveStateChange} />

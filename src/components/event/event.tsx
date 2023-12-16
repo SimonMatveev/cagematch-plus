@@ -8,7 +8,9 @@ import zoomIn from '../../images/fullscreen-in.svg';
 import scrollSvg from '../../images/scroll.svg';
 import scrollSvgWhite from '../../images/scroll-white.svg';
 import useDebouncedFunction from '../../hooks/useDebouncedFn';
-import { IEventStorage, IStateDisabled, TFindClosest } from '../../types/types';
+import { IEventStorage, IStateDisabled } from '../../types/types';
+import { KEYS_TO_BLOCK } from '../../utils/constants';
+import { closest } from '../../utils/functions';
 
 const App: FC = () => {
   const matches = document.querySelectorAll<HTMLElement>('.Match');
@@ -70,17 +72,6 @@ const App: FC = () => {
     }
   };
 
-  const closest: TFindClosest = (list, x) => {
-    let min, chosen = 0;
-    for (let i in list) {
-      min = Math.abs(list[chosen] - x);
-      if (Math.abs(list[i] - x) < min) {
-        chosen = +i;
-      }
-    }
-    return chosen;
-  };
-
   const findClosest = () => {
     const scroll = window.scrollY
     const i = closest(offsets, scroll);
@@ -95,6 +86,12 @@ const App: FC = () => {
     }
     setWheelControlEnabled(state => !state);
   };
+
+  const blockKeys = (e: KeyboardEvent) => {
+    if (KEYS_TO_BLOCK.includes(e.code)) {
+      e.preventDefault();
+    }
+  }
 
   useEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -111,8 +108,10 @@ const App: FC = () => {
       .then(res => setWheelControlEnabled(res.wheelcontrol));
     //getting new offsets on resize
     window.addEventListener('resize', handleOffsets);
+    window.addEventListener('keydown', blockKeys);
     return (() => {
       window.removeEventListener('resize', handleOffsets);
+      window.removeEventListener('keydown', blockKeys);
     });
   }, []);
 
