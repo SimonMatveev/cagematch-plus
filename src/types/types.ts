@@ -30,4 +30,11 @@ export interface ITVShow {
   regexp: string,
   name: string,
   isActive: boolean,
-}
+};
+
+export interface ITopBtns {
+  [key: string]: {
+    NAME: string,
+    URL: string,
+  }
+};

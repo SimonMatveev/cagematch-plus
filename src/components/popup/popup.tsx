@@ -3,6 +3,7 @@ import './popup.css';
 import { ITVShow, IUtilsActive } from '../../types/types';
 import UTILS_ACTIVE from '../../utils/utilsActive';
 import TV_SHOWS from '../../utils/tvShows';
+import { SHOWS_ACTIVE_NAME, UTILS_ACTIVE_NAME } from '../../utils/constants';
 
 const App: FC = () => {
   const [utilsActive, setUtilsActive] = useState<IUtilsActive>(UTILS_ACTIVE);
@@ -28,7 +29,7 @@ const App: FC = () => {
   }
 
   useEffect(() => {
-    Promise.all([chrome.storage.sync.get('utilsActive'), chrome.storage.sync.get('showsActive')])
+    Promise.all([chrome.storage.sync.get(UTILS_ACTIVE_NAME), chrome.storage.sync.get(SHOWS_ACTIVE_NAME)])
       .then(res => {
         setUtilsActive(res[0].utilsActive);
         setShowsActive(res[1].showsActive);

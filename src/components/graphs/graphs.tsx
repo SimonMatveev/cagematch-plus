@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import "./graphs.css";
 import GraphContent from './GraphContent';
+import { CLASS_GRAPH_BUTTON, CLASS_ROW_BTN_DEFAULT } from '../../utils/classes';
 
 const App = () => {
   const rows = [...document.querySelectorAll<HTMLTableRowElement>('.TRow')];
@@ -32,7 +33,7 @@ const App = () => {
       const rowData = [...row].map((item, index) => {
         if (index >= 3 && index <= 13) return +item.innerText;
         return null;
-      }).filter(notEmpty<number>);
+      }).filter(notEmpty);
       setDataset(rowData);
       setTitle(row[0].innerText);
     }
@@ -44,21 +45,21 @@ const App = () => {
     rows.forEach(row => {
       const rowBtn = row.children[1];
       rowBtn?.addEventListener('click', handleGraph);
-      rowBtn?.classList.add('graph__btn');
+      rowBtn?.classList.add(CLASS_GRAPH_BUTTON);
     });
 
-    const rowBtnDefault = document.querySelector('.InformationBoxContents');
+    const rowBtnDefault = document.querySelector(CLASS_ROW_BTN_DEFAULT);
     rowBtnDefault?.addEventListener('click', handleDefaultGraph);
-    rowBtnDefault?.classList.add('graph__btn');
+    rowBtnDefault?.classList.add(CLASS_GRAPH_BUTTON);
 
     return () => {
       rows.forEach(row => {
         const rowBtn = row.children[1];
         rowBtn?.removeEventListener('click', handleGraph);
-        rowBtn?.classList.remove('graph__btn');
+        rowBtn?.classList.remove(CLASS_GRAPH_BUTTON);
       });
       rowBtnDefault?.removeEventListener('click', handleDefaultGraph);
-      rowBtnDefault?.classList.remove('graph__btn');
+      rowBtnDefault?.classList.remove(CLASS_GRAPH_BUTTON);
     }
   }, []);
 

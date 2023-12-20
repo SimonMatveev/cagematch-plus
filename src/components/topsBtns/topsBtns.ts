@@ -1,8 +1,10 @@
 import { TCreateLiFn } from "../../types/types";
+import { CLASS_LIST_ITEM, CLASS_PROFILE_MENU } from '../../utils/classes';
+import { TOP_BTNS, UTILS_ACTIVE_NAME } from '../../utils/constants';
 
 const createListItem: TCreateLiFn = (link, text) => {
   const li = document.createElement('li');
-  li.classList.add('ContentNavigatorItem');
+  li.classList.add(CLASS_LIST_ITEM);
   const a = document.createElement('a');
   a.href = link;
   a.textContent = text;
@@ -11,15 +13,15 @@ const createListItem: TCreateLiFn = (link, text) => {
 };
 
 const createBtns = () => {
-  const menu = document.querySelector<HTMLUListElement>('.ContentNavigator');
+  const menu = document.querySelector<HTMLUListElement>(CLASS_PROFILE_MENU);
 
   if (menu) {
-    menu.append(createListItem('?id=111&view=list&sortby=colRating&sorttype=DESC', 'Best Matches'));
-    menu.append(createListItem('?sortby=colDate&sorttype=ASC&id=1&view=search&sEventName=&sPromotion=1&sDateFromDay=01&sDateFromMonth=01&sDateFromYear=2001&sDateTillDay=31&sDateTillMonth=12&sDateTillYear=2023&sRegion=&sEventType=Pay+Per+View&sLocation=&sArena=&sAny=', 'Events (2001-now)'));
+    menu.append(createListItem(TOP_BTNS.BEST_MATCHES.URL, TOP_BTNS.BEST_MATCHES.NAME));
+    menu.append(createListItem(TOP_BTNS.EVENTS.URL, TOP_BTNS.EVENTS.NAME));
   }
 };
 
-chrome.storage.sync.get('utilsActive')
+chrome.storage.sync.get(UTILS_ACTIVE_NAME)
   .then((res) => {
     if (res.utilsActive.topsBtns) {
       createBtns();

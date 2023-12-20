@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend, ChartOptions, } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { BACKGROUND_COLOR, BORDER_COLOR } from '../../utils/constants';
 
 ChartJS.register(
   BarElement,
@@ -44,8 +45,8 @@ const GraphContent: FC<IGraphProps> = ({ dataset }) => {
       {
         label: '',
         data: dataset,
-        backgroundColor: '#750404',
-        borderColor: 'black',
+        backgroundColor: BACKGROUND_COLOR,
+        borderColor: BORDER_COLOR,
       }
     ]
   };
