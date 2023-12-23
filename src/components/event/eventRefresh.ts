@@ -7,7 +7,7 @@ const move: { [key: string]: number[] } = {
 
 //TODO rewrite to spin from from any point of circle
 const refreshWithMouse = (e: MouseEvent) => {
-  if (e.buttons === 1) {
+  if (e.buttons === 2) {
     console.log(move)
     console.log(e.clientX, e.clientY)
     if (move.top.length === 0) {
