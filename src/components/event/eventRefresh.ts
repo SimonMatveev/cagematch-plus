@@ -1,3 +1,5 @@
+import { UTILS_ACTIVE_NAME } from '../../utils/constants';
+
 const move: { [key: string]: number[] } = {
   top: [],
   right: [],
@@ -36,9 +38,9 @@ const resetMove = () => {
   move.left = [];
 }
 
-chrome.storage.sync.get('utilsActive')
+chrome.storage.sync.get(UTILS_ACTIVE_NAME)
   .then(res => {
-    if (res.utilsActive.refreshEvent) {
+    if (res[UTILS_ACTIVE_NAME].refreshEvent) {
 
       window.addEventListener('mousemove', refreshWithMouse);
       window.addEventListener('mousedown', resetMove);

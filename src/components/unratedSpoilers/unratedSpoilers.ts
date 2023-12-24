@@ -1,3 +1,5 @@
+import { CLASS_MATCH_RECOMENDED_LINE, CLASS_MATCH_RECOMENDED_WON, CLASS_MATCH_RECOMENDEND_CANDIDATE } from '../../utils/classes';
+import { UTILS_ACTIVE_NAME } from '../../utils/constants';
 import './unratedSpoilers.css';
 
 const showNotRated: EventListener = (e) => {
@@ -5,15 +7,15 @@ const showNotRated: EventListener = (e) => {
   const target = e.target as Element;
   target.classList.remove('rating_hidden');
   target.closest('a')?.classList.remove('rating-link_hidden');
-  target.closest('.MatchRecommendedLine')?.querySelector('.MatchRecommendedWON')?.classList.remove('rating_hidden');
+  target.closest(CLASS_MATCH_RECOMENDED_LINE)?.querySelector(CLASS_MATCH_RECOMENDED_WON)?.classList.remove('rating_hidden');
   target.removeEventListener('click', showNotRated);
 };
 
 const hideNotRated = () => {
-  [...document.querySelectorAll('.MatchRecommendedCandidate')].forEach(item => {
-    const ratingLine = item.closest('.MatchRecommendedLine');
+  [...document.querySelectorAll(CLASS_MATCH_RECOMENDEND_CANDIDATE)].forEach(item => {
+    const ratingLine = item.closest(CLASS_MATCH_RECOMENDED_LINE);
     const rating = ratingLine?.querySelector('span');
-    const WON = ratingLine?.querySelector('.MatchRecommendedWON');
+    const WON = ratingLine?.querySelector(CLASS_MATCH_RECOMENDED_WON);
 
     rating?.classList.add('rating_hidden');
     WON?.classList.add('rating_hidden');
@@ -23,9 +25,9 @@ const hideNotRated = () => {
   })
 };
 
-chrome.storage.sync.get('utilsActive')
+chrome.storage.sync.get(UTILS_ACTIVE_NAME)
   .then(res => {
-    if (res.utilsActive.unratedSpoilers) {
+    if (res[UTILS_ACTIVE_NAME].unratedSpoilers) {
       hideNotRated();
     }
   })

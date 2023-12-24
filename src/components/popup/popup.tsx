@@ -31,8 +31,8 @@ const App: FC = () => {
   useEffect(() => {
     Promise.all([chrome.storage.sync.get(UTILS_ACTIVE_NAME), chrome.storage.sync.get(SHOWS_ACTIVE_NAME)])
       .then(res => {
-        setUtilsActive(res[0].utilsActive);
-        setShowsActive(res[1].showsActive);
+        setUtilsActive(res[0][UTILS_ACTIVE_NAME]);
+        setShowsActive(res[1][SHOWS_ACTIVE_NAME]);
       })
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
@@ -40,7 +40,7 @@ const App: FC = () => {
 
   useEffect(() => {
     if (changeUtilsFromPopup) {
-      chrome.storage.sync.set({ utilsActive })
+      chrome.storage.sync.set({ [UTILS_ACTIVE_NAME]: utilsActive })
         .then(() => setChangeUtilsFromPopup(false))
         .catch(err => console.log(err));
     }
@@ -48,13 +48,11 @@ const App: FC = () => {
 
   useEffect(() => {
     if (changeShowsFromPopup) {
-      chrome.storage.sync.set({ showsActive })
+      chrome.storage.sync.set({ [SHOWS_ACTIVE_NAME]: showsActive })
         .then(() => setChangeShowsFromPopup(false))
         .catch(err => console.log(err));
     }
   }, [changeShowsFromPopup]);
-
-  useEffect(() => console.log(showsActive), [showsActive])
 
   return (
     <section className='popup'>

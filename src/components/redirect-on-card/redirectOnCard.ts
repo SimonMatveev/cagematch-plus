@@ -1,17 +1,18 @@
-import { CLASS_REDIRECT_ON_CARD } from '../../utils/classes';
+import { CLASS_LIST_ITEM } from '../../utils/classes';
+import { UTILS_ACTIVE_NAME } from '../../utils/constants';
 
 const redirectOnCard = () => {
   const links = document.querySelectorAll<HTMLLinkElement>('a');
   [...links].forEach(link => {
-    if (/id=1&/g.test(link.href) && !/&page=3/g.test(link.href) && !link.closest('li')?.classList.contains(CLASS_REDIRECT_ON_CARD)) {
+    if (/id=1&/g.test(link.href) && !/&page=3/g.test(link.href) && !link.closest('li')?.classList.contains(CLASS_LIST_ITEM)) {
       link.href += '&page=3';
     }
   });
 };
 
-chrome.storage.sync.get('utilsActive')
+chrome.storage.sync.get(UTILS_ACTIVE_NAME)
   .then(res => {
-    if (res.utilsActive.redirectOnCard) {
+    if (res[UTILS_ACTIVE_NAME].redirectOnCard) {
       redirectOnCard();
     }
   })

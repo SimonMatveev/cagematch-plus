@@ -23,7 +23,7 @@ const createBtns = () => {
 
 chrome.storage.sync.get(UTILS_ACTIVE_NAME)
   .then((res) => {
-    if (res.utilsActive.topsBtns) {
+    if (res[UTILS_ACTIVE_NAME].topsBtns) {
       createBtns();
     }
   })
