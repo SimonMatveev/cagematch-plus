@@ -1,16 +1,6 @@
-import { TCreateLiFn } from "../../types/types";
-import { CLASS_LIST_ITEM, CLASS_PROFILE_MENU } from '../../utils/classes';
+import { CLASS_PROFILE_MENU } from '../../utils/classes';
 import { TOP_BTNS, UTILS_ACTIVE_NAME } from '../../utils/constants';
-
-const createListItem: TCreateLiFn = (link, text) => {
-  const li = document.createElement('li');
-  li.classList.add(CLASS_LIST_ITEM);
-  const a = document.createElement('a');
-  a.href = link;
-  a.textContent = text;
-  li.append(a);
-  return li;
-};
+import { createListItem } from '../../utils/functions';
 
 const createBtns = () => {
   const menu = document.querySelector<HTMLUListElement>(CLASS_PROFILE_MENU);
