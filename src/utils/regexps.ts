@@ -1,3 +1,3 @@
-export const EVENT_PATTERN = /&nr=(\d+)/;
+export const REGEXP_PAGE_3 = /&page=3/g;
 
-export const BEST_MATCHES_URL = '?id=111&view=list&sortby=colRating&sorttype=DESC';
+export const REGEXP_ID_1 = /id=1&/g;
