@@ -20,44 +20,27 @@
         "src/components/event/eventRefresh.ts",
         "src/components/unratedSpoilers/unratedSpoilers.ts"
       ],
-      "matches": [
-        "https://www.cagematch.net/?id=1&*"
-      ],
+      "matches": ["https://www.cagematch.net/?id=1&*"],
       "run_at": "document_end"
     },
     {
-      "js": [
-        "src/components/redirect-on-card/redirectOnCard.ts"
-      ],
-      "matches": [
-        "https://www.cagematch.net/*"
-      ],
+      "js": ["src/components/redirect-on-card/redirectOnCard.ts"],
+      "matches": ["https://www.cagematch.net/*"],
       "run_at": "document_idle"
     },
     {
-      "js": [
-        "src/components/graphs/index.tsx",
-        "src/components/topsBtns/topsBtns.ts"
-      ],
-      "matches": [
-        "https://www.cagematch.net/?id=68&page=2"
-      ],
+      "js": ["src/components/graphs/index.tsx", "src/components/topsBtns/topsBtns.ts"],
+      "matches": ["https://www.cagematch.net/?id=68&page=2"],
       "run_at": "document_end"
     },
     {
-      "js": [
-        "src/components/favEvents/index.tsx"
-      ],
-      "matches": [
-        "https://www.cagematch.net/?id="
-      ],
+      "js": ["src/components/favEvents/index.tsx"],
+      "matches": ["https://www.cagematch.net/?id="],
       "run_at": "document_end"
     }
   ],
   "background": {
     "service_worker": "src/background.ts"
   },
-  "permissions": [
-    "storage"
-  ]
+  "permissions": ["storage"]
 }

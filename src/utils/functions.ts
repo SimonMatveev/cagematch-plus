@@ -1,9 +1,9 @@
 import { TCreateLiFn, TFindClosest } from '../types/types';
 import { CLASS_LIST_ITEM } from './classes';
 
-
 export const closest: TFindClosest = (list, x) => {
-  let min, chosen = 0;
+  let min,
+    chosen = 0;
   for (let i in list) {
     min = Math.abs(list[chosen] - x);
     if (Math.abs(list[i] - x) < min) {

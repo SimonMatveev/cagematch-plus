@@ -1,20 +1,21 @@
 import { FC, useEffect, useState } from 'react';
-import './event.css';
-import upBtn from '../../images/triangle-up.svg';
-import downBtn from '../../images/triangle-down.svg';
-import resetBtn from '../../images/reset.svg';
-import zoomOut from '../../images/fullscreen-out.svg';
-import zoomIn from '../../images/fullscreen-in.svg';
-import scrollSvg from '../../images/scroll.svg';
-import scrollSvgWhite from '../../images/scroll-white.svg';
 import useDebouncedFunction from '../../hooks/useDebouncedFn';
+import zoomIn from '../../images/fullscreen-in.svg';
+import zoomOut from '../../images/fullscreen-out.svg';
+import resetBtn from '../../images/reset.svg';
+import scrollSvgWhite from '../../images/scroll-white.svg';
+import scrollSvg from '../../images/scroll.svg';
+import downBtn from '../../images/triangle-down.svg';
+import upBtn from '../../images/triangle-up.svg';
 import { IEventStorage, IStateDisabled } from '../../types/types';
 import { KEYS_TO_BLOCK } from '../../utils/constants';
 import { closest } from '../../utils/functions';
+import { REGEXP_GET_ID } from '../../utils/regexps';
+import './event.css';
 
 const App: FC = () => {
   const matches = document.querySelectorAll<HTMLElement>('.Match');
-  let key: string = window.location.toString().match(/&nr=(\d+)/)?.[1] || '0';
+  let key: string = window.location.toString().match(REGEXP_GET_ID)?.[1] || '0';
 
   const [offsets, setOffsets] = useState<number[]>(getOffsets());
   const [counter, setCounter] = useState(0);
@@ -26,12 +27,14 @@ const App: FC = () => {
   const [isDisabled, setDisabled] = useState<IStateDisabled>({
     upBtn: true,
     downBtn: false,
-    resetBtn: false
+    resetBtn: false,
   });
 
   function getOffsets(): number[] {
     let vh: number = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
-    let matchOffsets: number[] = [...matches].map(match => (match.offsetHeight + match.offsetTop) * 1.5 - vh + 20);
+    let matchOffsets: number[] = [...matches].map(
+      (match) => (match.offsetHeight + match.offsetTop) * 1.5 - vh + 20
+    );
     matchOffsets.unshift(0);
     return matchOffsets;
   }
@@ -40,20 +43,20 @@ const App: FC = () => {
 
   const handleStore = () => {
     const scroll = window.scrollY;
-    const storeData: IEventStorage = { counter, counterTemp, isZoomed, scroll, };
+    const storeData: IEventStorage = { counter, counterTemp, isZoomed, scroll };
     chrome.storage.session.set({ [key]: storeData });
     chrome.storage.sync.set({ wheelcontrol: isWheelControlEnabled });
   };
 
-  const goDown = () => setCounter(counter => ++counter);
+  const goDown = () => setCounter((counter) => ++counter);
 
-  const goUp = () => setCounter(counter => --counter);
+  const goUp = () => setCounter((counter) => --counter);
 
   const reset = () => setCounter(0);
 
   const handleZoom = () => {
     if (isZoomed) findClosest();
-    setZoomed(zoom => !zoom);
+    setZoomed((zoom) => !zoom);
   };
 
   const handleScrollWithoutDebounce = (e: WheelEvent) => {
@@ -73,7 +76,7 @@ const App: FC = () => {
   };
 
   const findClosest = () => {
-    const scroll = window.scrollY
+    const scroll = window.scrollY;
     const i = closest(offsets, scroll);
     setCounter(i);
   };
@@ -84,19 +87,19 @@ const App: FC = () => {
     } else if (isWheelControlEnabled && isZoomed) {
       setCounter(9999);
     }
-    setWheelControlEnabled(state => !state);
+    setWheelControlEnabled((state) => !state);
   };
 
   const blockKeys = (e: KeyboardEvent) => {
     if (KEYS_TO_BLOCK.includes(e.code)) {
       e.preventDefault();
     }
-  }
+  };
 
   useEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     //getting states from storage
-    chrome.storage.session.get([key]).then(res => {
+    chrome.storage.session.get([key]).then((res) => {
       if (res[key]) {
         setCounter(res[key].counterTemp || res[key].counter);
         setZoomed(res[key].isZoomed);
@@ -104,15 +107,14 @@ const App: FC = () => {
       }
     });
 
-    chrome.storage.sync.get('wheelcontrol')
-      .then(res => setWheelControlEnabled(res.wheelcontrol));
+    chrome.storage.sync.get('wheelcontrol').then((res) => setWheelControlEnabled(res.wheelcontrol));
     //getting new offsets on resize
     window.addEventListener('resize', handleOffsets);
     window.addEventListener('keydown', blockKeys);
-    return (() => {
+    return () => {
       window.removeEventListener('resize', handleOffsets);
       window.removeEventListener('keydown', blockKeys);
-    });
+    };
   }, []);
 
   useEffect(() => {
@@ -152,10 +154,10 @@ const App: FC = () => {
   useEffect(() => {
     window.addEventListener('wheel', handleScroll, { passive: false });
     window.addEventListener('beforeunload', handleStore);
-    return (() => {
+    return () => {
       window.removeEventListener('wheel', handleScroll);
       window.removeEventListener('beforeunload', handleStore);
-    });
+    };
   }, [counter, isZoomed, isWheelControlEnabled]);
 
   useEffect(() => {
@@ -167,37 +169,64 @@ const App: FC = () => {
 
   return (
     <div className='event-controls'>
-      <button type="button"
+      <button
+        type='button'
         className={`event-controls__btn${isDisabled.upBtn ? ' event-controls__btn_disabled' : ''}`}
         disabled={isDisabled.upBtn}
-        onClick={goUp}>
+        onClick={goUp}
+      >
         <img className='event-controls__img' src={chrome.runtime.getURL(upBtn)} alt='Вверх' />
       </button>
-      <button type="button"
+      <button
+        type='button'
         className={`event-controls__btn${!isZoomed ? ' event-controls__zoom_off' : ''}`}
-        onClick={handleZoom}>
-        <img className='event-controls__img' src={isZoomed ? chrome.runtime.getURL(zoomOut) : chrome.runtime.getURL(zoomIn)} alt='Изменить зум' />
+        onClick={handleZoom}
+      >
+        <img
+          className='event-controls__img'
+          src={isZoomed ? chrome.runtime.getURL(zoomOut) : chrome.runtime.getURL(zoomIn)}
+          alt='Изменить зум'
+        />
       </button>
-      <button type="button"
-        className={`event-controls__btn${isDisabled.resetBtn ? ' event-controls__btn_disabled' : ''}`}
+      <button
+        type='button'
+        className={`event-controls__btn${
+          isDisabled.resetBtn ? ' event-controls__btn_disabled' : ''
+        }`}
         disabled={isDisabled.resetBtn}
-        onClick={reset}>
+        onClick={reset}
+      >
         <img className='event-controls__img' src={chrome.runtime.getURL(resetBtn)} alt='Ресет' />
       </button>
-      <button type="button"
-        className={`event-controls__btn${isDisabled.downBtn ? ' event-controls__btn_disabled' : ''}`}
+      <button
+        type='button'
+        className={`event-controls__btn${
+          isDisabled.downBtn ? ' event-controls__btn_disabled' : ''
+        }`}
         disabled={isDisabled.downBtn}
-        onClick={goDown}>
+        onClick={goDown}
+      >
         <img className='event-controls__img' src={chrome.runtime.getURL(downBtn)} alt='Вниз' />
       </button>
-      <button type="button"
-        className={`event-controls__btn${!isWheelControlEnabled ? ' event-controls__btn_inactive' : ''}`}
-        onClick={handleScrollEnabling}>
-        <img className='event-controls__img' src={!isWheelControlEnabled ? chrome.runtime.getURL(scrollSvgWhite) : chrome.runtime.getURL(scrollSvg)} alt='Режим управления колесом мыши' />
+      <button
+        type='button'
+        className={`event-controls__btn${
+          !isWheelControlEnabled ? ' event-controls__btn_inactive' : ''
+        }`}
+        onClick={handleScrollEnabling}
+      >
+        <img
+          className='event-controls__img'
+          src={
+            !isWheelControlEnabled
+              ? chrome.runtime.getURL(scrollSvgWhite)
+              : chrome.runtime.getURL(scrollSvg)
+          }
+          alt='Режим управления колесом мыши'
+        />
       </button>
     </div>
-  )
+  );
 };
 
 export default App;
-
