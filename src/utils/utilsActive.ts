@@ -1,4 +1,4 @@
-import { IUtilsActive } from "../types/types";
+import { IUtilsActive } from '../types/types';
 
 const UTILS_ACTIVE: IUtilsActive = {
   event: true,
@@ -7,6 +7,7 @@ const UTILS_ACTIVE: IUtilsActive = {
   redirectOnCard: true,
   topsBtns: true,
   favEvents: true,
+  refreshWithMouse: true,
   refreshEvent: true,
 };
 

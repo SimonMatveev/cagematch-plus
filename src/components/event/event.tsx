@@ -108,6 +108,21 @@ const App: FC = () => {
     });
 
     chrome.storage.sync.get('wheelcontrol').then((res) => setWheelControlEnabled(res.wheelcontrol));
+    // Ищем среди матчей такой, для которого требуется перезагрузка эвента. Если такой есть - перезагружаем
+    const handleRefresh = () => {
+      matches.forEach(async (match) => {
+        const link = match.querySelector('a');
+        if (link && link.href) {
+          const id = link.href.match(REGEXP_GET_ID)?.[1] || 0;
+          const res = await chrome.storage.session.get([`reload-${id}`]);
+          if (res[`reload-${id}`]) {
+            await chrome.storage.session.remove([`reload-${id}`]);
+            window.location.reload();
+          }
+        }
+      });
+    };
+    handleRefresh();
     //getting new offsets on resize
     window.addEventListener('resize', handleOffsets);
     window.addEventListener('keydown', blockKeys);

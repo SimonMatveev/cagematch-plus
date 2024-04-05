@@ -15,16 +15,20 @@
   },
   "content_scripts": [
     {
-      "js": [
-        "src/components/event/index.tsx",
-        "src/components/event/eventRefresh.ts",
-        "src/components/unratedSpoilers/unratedSpoilers.ts"
-      ],
+      "js": ["src/components/event/index.tsx", "src/components/unratedSpoilers/unratedSpoilers.ts"],
       "matches": ["https://www.cagematch.net/?id=1&*"],
       "run_at": "document_end"
     },
     {
-      "js": ["src/components/redirect-on-card/redirectOnCard.ts"],
+      "js": ["src/components/event/buttonPressForRefreshListener.ts"],
+      "matches": ["https://www.cagematch.net/?id=111&*"],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "src/components/redirect-on-card/redirectOnCard.ts",
+        "src/components/event/eventRefreshWithMouse.ts"
+      ],
       "matches": ["https://www.cagematch.net/*"],
       "run_at": "document_idle"
     },

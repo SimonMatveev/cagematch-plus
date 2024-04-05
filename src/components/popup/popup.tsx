@@ -125,6 +125,18 @@ const App: FC = () => {
               Дополнительные кнопки в профиле
             </label>
           </div>
+          <div className='popup__wrapper'>
+            <input
+              className='popup__checkbox-active'
+              type='checkbox'
+              id='refreshWithMouse'
+              checked={utilsActive.refreshWithMouse}
+              onChange={handleActiveStateChange}
+            />
+            <label htmlFor='refreshWithMouse' className='popup__label'>
+              Перезагрузка страницы жестом
+            </label>
+          </div>
           <div className='popup__wrapper popup__wrapper_border'>
             <input
               className='popup__checkbox-active'
@@ -134,7 +146,7 @@ const App: FC = () => {
               onChange={handleActiveStateChange}
             />
             <label htmlFor='refreshEvent' className='popup__label'>
-              Перезагрузка страницы жестом
+              Перезагрузка эвентов
             </label>
           </div>
           <div className='popup__wrapper'>

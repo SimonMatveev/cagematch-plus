@@ -5,6 +5,7 @@ export const CLASS_ONLINE_STREAM = '.TRowOnlineStream';
 // event classes
 export const CLASS_TROW: [string, string] = ['TRow1', 'TRow2'];
 export const CLASS_ROW_BTN_DEFAULT = '.InformationBoxContents';
+export const CLASS_BTN_SUBMIT = '.CommentOptions';
 // graph classes
 export const CLASS_GRAPH_BUTTON = 'graph__btn';
 // hide unrated & redirect on card classes
